@@ -1,51 +1,41 @@
 package de.viawhs.backend.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import org.springframework.lang.Nullable;
+public class ServerInfo {
+    private String url;
+    private String username;
+    private String password;
 
-import java.util.Objects;
+    public ServerInfo(String url) {
+        this.url = url;
+    }
 
-public final class ServerInfo {
-    private final String url;
-    private final String user;
-    private final String password;
-
-    private ServerInfo(String url, @Nullable String user, @Nullable String password) {
-        this.url = Objects.requireNonNull(url, "url");
-        this.user = user;
+    public ServerInfo(String url, String username, String password) {
+        this.url = url;
+        this.username = username;
         this.password = password;
     }
 
-    @JsonCreator
-    public static ServerInfo of(String url, @Nullable String user, @Nullable String password) {
-        return new ServerInfo(url, user, password);
-    }
-
-    public static ServerInfo anonymous(String url) {return of(url, null, null);}
-
-    public String url() {
+    public String getUrl() {
         return url;
     }
 
-    @Nullable public String user() {
-        return user;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
-    @Nullable public String password() {
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
         return password;
     }
 
-    @Override public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
-        ServerInfo that = (ServerInfo) o;
-        return url.equals(that.url) && Objects.equals(user, that.user) && Objects.equals(password, that.password);
+    public void setPassword(String password) {
+        this.password = password;
     }
-
-    @Override public int hashCode() {
-        return Objects.hash(url, user, password);
-    }
-
 }
