@@ -3,11 +3,10 @@ package de.viawhs.backend.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-@JsonDeserialize
 public class User {
-    @JsonProperty("login") private String login;
-    @JsonProperty("id") private int id;
-    @JsonProperty("url") private String url;
+    private String login;
+    private int id;
+    private String url;
 
     public User() {}
 

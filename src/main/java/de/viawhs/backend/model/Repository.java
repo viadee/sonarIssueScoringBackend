@@ -3,20 +3,23 @@ package de.viawhs.backend.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-@JsonDeserialize
+import java.util.List;
+
 public class Repository {
-    @JsonProperty("id") private int id;
-    @JsonProperty("name") private String name;
-    @JsonProperty("full_name") private String full_name;
-    @JsonProperty("owner") private User owner;
+    private int id;
+    private String name;
+    private String full_name;
+    private User owner;
+    private List<Branch> branches;
 
     public Repository() {}
 
-    public Repository(int id, String name, String full_name, User owner) {
+    public Repository(int id, String name, String full_name, User owner, List<Branch> branches) {
         this.id = id;
         this.name = name;
         this.full_name = full_name;
         this.owner = owner;
+        this.branches = branches;
     }
 
     public int getId() {
@@ -49,5 +52,13 @@ public class Repository {
 
     public void setOwner(User owner) {
         this.owner = owner;
+    }
+
+    public List<Branch> getBranches() {
+        return branches;
+    }
+
+    public void setBranches(List<Branch> branches) {
+        this.branches = branches;
     }
 }

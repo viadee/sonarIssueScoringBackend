@@ -1,5 +1,6 @@
 package de.viawhs.backend.rest;
 
+import de.viawhs.backend.model.Branch;
 import de.viawhs.backend.model.Repository;
 import de.viawhs.backend.model.ServerInfo;
 import de.viawhs.backend.service.GitService;
@@ -21,15 +22,23 @@ public class ServerController {
         this.gitService = gitService;
     }
 
+    // Get all public repositories with a username
     @GetMapping("/git-repo")
     public Repository[] getAllPublicRepositories(@RequestParam("username") String username) {
         ResponseEntity<Repository[]> response = this.gitService.getAllPublicRepositories(username);
         return response.getBody();
     }
 
+    // Get all public and private repositories with a token
     @PostMapping("/git-repo")
     public Repository[] getAllRepositories(@RequestBody ServerInfo gitServer) {
         ResponseEntity<Repository[]> response = this.gitService.getAllRepositories(gitServer.getToken());
         return response.getBody();
+    }
+
+    @GetMapping("/git-repo/branches")
+    public Branch[] getAllBranches(@RequestParam("owner") String owner, @RequestParam("repo") String repo) {
+
+        return null;
     }
 }
