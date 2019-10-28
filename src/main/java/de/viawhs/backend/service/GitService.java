@@ -1,5 +1,10 @@
 package de.viawhs.backend.service;
 
+import de.viawhs.backend.model.Repository;
+import org.springframework.http.ResponseEntity;
+
+import java.util.List;
+
 public interface GitService {
-    public String getAllPublicRepositories(String username);
+    public ResponseEntity<Repository[]> getAllPublicRepositories(String username);
 }
