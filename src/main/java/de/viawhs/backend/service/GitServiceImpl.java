@@ -5,10 +5,7 @@ import de.viawhs.backend.model.ServerInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -25,12 +22,16 @@ public class GitServiceImpl implements GitService{
 
     public ResponseEntity<Repository[]> getAllPublicRepositories(String username) {
         String url = "https://api.github.com/users/" + username + "/repos";
-        /*
-        ResponseEntity<List<Repository>> responseEntity = restTemplate.exchange(
-                url, HttpMethod.GET, null, new ParameterizedTypeReference<List<Repository>>() {});
-        List<Repository> objects = responseEntity.getBody();
-        */
         ResponseEntity<Repository[]> response = restTemplate.getForEntity(url, Repository[].class);
         return response;
+    }
+
+    public ResponseEntity<Repository[]> getAllRepositories(String token) {
+        String url = "https://api.github.com/user/repos";
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + token);
+        HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
+        ResponseEntity<Repository[]> responseEntity = restTemplate.exchange(url, HttpMethod.GET, entity, Repository[].class);
+        return responseEntity;
     }
 }

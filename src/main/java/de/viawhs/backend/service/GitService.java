@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface GitService {
     public ResponseEntity<Repository[]> getAllPublicRepositories(String username);
+    public ResponseEntity<Repository[]> getAllRepositories(String token);
 }

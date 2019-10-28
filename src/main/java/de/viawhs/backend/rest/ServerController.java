@@ -1,7 +1,9 @@
 package de.viawhs.backend.rest;
 
 import de.viawhs.backend.model.Repository;
+import de.viawhs.backend.model.ServerInfo;
 import de.viawhs.backend.service.GitService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
@@ -20,10 +22,14 @@ public class ServerController {
     }
 
     @GetMapping("/git-repo")
-    public Repository[] callGitServer(@RequestParam("username") String username) {
+    public Repository[] getAllPublicRepositories(@RequestParam("username") String username) {
         ResponseEntity<Repository[]> response = this.gitService.getAllPublicRepositories(username);
         return response.getBody();
     }
 
-
+    @PostMapping("/git-repo")
+    public Repository[] getAllRepositories(@RequestBody ServerInfo gitServer) {
+        ResponseEntity<Repository[]> response = this.gitService.getAllRepositories(gitServer.getToken());
+        return response.getBody();
+    }
 }

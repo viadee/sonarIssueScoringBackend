@@ -4,6 +4,9 @@ public class ServerInfo {
     private String url;
     private String username;
     private String password;
+    private String token;
+
+    public ServerInfo() {}
 
     public ServerInfo(String url) {
         this.url = url;
@@ -37,5 +40,13 @@ public class ServerInfo {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }
