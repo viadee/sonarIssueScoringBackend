@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/server")
+@RequestMapping("/api/server")
 public class ServerController {
     private final GitService gitService;
 
