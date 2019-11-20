@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/server")
 public class ServerController {
-    private final GitService gitService;
+    private GitService gitService;
 
     @Autowired
     public ServerController(GitService gitService) {

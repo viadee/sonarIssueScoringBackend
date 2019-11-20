@@ -4,6 +4,7 @@ import de.viawhs.backend.service.GitService;
 import de.viawhs.backend.service.GitServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.TestConfiguration;
@@ -33,8 +34,16 @@ public class ServerControllerTest {
     @Test
     public void gitServerTest() throws Exception {
         mvc.perform(
-                MockMvcRequestBuilders.get("/server/git-repo?username=trnhan251")
+                MockMvcRequestBuilders.get("/api/server/git-repo?username=trnhan251")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
+        gitService.getAllPublicRepositories("trnhan251");
+    }
+
+    public void getBranchesTest() throws Exception {
+        mvc.perform(
+                MockMvcRequestBuilders.get("/api/server/git-repo/branches?owner=trnhan251&repo=cs7dotnetcore2")
+                        .accept(MediaType.APPLICATION_JSON)).
+                andExpect(status().isOk());
     }
 }

@@ -24,18 +24,21 @@ public class GitServiceImpl implements GitService{
     }
 
     public ResponseEntity<Repository[]> getAllPublicRepositories(String username) {
-        String url = "https://api.github.com/users/" + username + "/repos";
-        ResponseEntity<Repository[]> response = restTemplate.getForEntity(url, Repository[].class);
+        if (isServerAvailable(username)) {
+            String url = "https://api.github.com/users/" + username + "/repos";
+            ResponseEntity<Repository[]> response = restTemplate.getForEntity(url, Repository[].class);
 
-        if (response.getBody() != null)
-            for (Repository repo : response.getBody()) {
-                ResponseEntity<Branch[]> branches = getAllBranches(repo);
-                if (branches != null)
-                    if (branches.getBody() != null)
-                        repo.setBranches(Arrays.asList(branches.getBody()));
-            }
+            if (response.getBody() != null)
+                for (Repository repo : response.getBody()) {
+                    ResponseEntity<Branch[]> branches = getAllBranches(repo);
+                    if (branches != null)
+                        if (branches.getBody() != null)
+                            repo.setBranches(Arrays.asList(branches.getBody()));
+                }
 
-        return response;
+            return response;
+        } else
+            return null;
     }
 
     public ResponseEntity<Repository[]> getAllRepositories(String token) {
@@ -65,5 +68,16 @@ public class GitServiceImpl implements GitService{
             e.printStackTrace();
         }
         return response;
+    }
+
+    private boolean isServerAvailable(String username) {
+        String url = "https://api.github.com/users/" + username + "/repos";
+        try {
+            ResponseEntity<Repository[]> response = restTemplate.getForEntity(url, Repository[].class);
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
     }
 }
