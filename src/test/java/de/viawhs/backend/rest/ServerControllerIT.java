@@ -18,8 +18,24 @@ public class ServerControllerIT {
 
     @Test
     public void contextLoad() throws JSONException {
-        String response = this.restTemplate.getForObject("/api/server/git-repo?username=trnhan251", String.class);
-        JSONAssert.assertEquals("[{id:191923132}, {id:181204192}, {id:203966717}, {id:215288135}]", response, false);
+
+        /*Beginning Tests: Getting all public Repositories*/
+        String responseFilledArray = this.restTemplate.getForObject(
+                "/api/server/git-repo?username=trnhan251", String.class);
+        JSONAssert.assertEquals(
+                "[{id:191923132}, {id:181204192}, {id:203966717}, {id:215288135}]",
+                responseFilledArray,
+                false);
+
+        String responseEmptyArray = this.restTemplate.getForObject(
+                "/api/server/git-repo?username=k-backes", String.class);
+        JSONAssert.assertEquals(
+                "[]",
+                responseEmptyArray,
+                false);
+        /*End Tests: Getting all public Repositories*/
+
+
     }
 
 }
