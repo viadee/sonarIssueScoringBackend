@@ -9,4 +9,6 @@ import java.util.List;
 public interface GitService {
     ResponseEntity<Repository[]> getAllPublicRepositories(String username);
     ResponseEntity<Repository[]> getAllRepositories(String token);
+    ResponseEntity<Branch[]> getAllBranchesFromPublicRepos(String username, String repo);
+    ResponseEntity<Branch[]> getAllBranchesFromRepo(String token, String username, String repo);
 }

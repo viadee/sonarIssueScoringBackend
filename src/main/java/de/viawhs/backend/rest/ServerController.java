@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/server")
+@RequestMapping("/server")
 public class ServerController {
     private GitService gitService;
 
@@ -23,22 +23,28 @@ public class ServerController {
     }
 
     // Get all public repositories with a username
-    @GetMapping("/git-repo")
+    @GetMapping("/git-repo/public")
     public Repository[] getAllPublicRepositories(@RequestParam("username") String username) {
         ResponseEntity<Repository[]> response = this.gitService.getAllPublicRepositories(username);
         return response.getBody();
     }
 
     // Get all public and private repositories with a token
-    @PostMapping("/git-repo")
-    public Repository[] getAllRepositories(@RequestBody ServerInfo gitServer) {
-        ResponseEntity<Repository[]> response = this.gitService.getAllRepositories(gitServer.getToken());
+    @GetMapping("/git-repo/all")
+    public Repository[] getAllRepositories(@RequestHeader("token") String token) {
+        ResponseEntity<Repository[]> response = this.gitService.getAllRepositories(token);
         return response.getBody();
     }
 
-    @GetMapping("/git-repo/branches")
-    public Branch[] getAllBranches(@RequestParam("owner") String owner, @RequestParam("repo") String repo) {
+    @GetMapping("/git-repo/public/branches")
+    public Branch[] getAllBranchesFromPublicRepos(@RequestParam("username") String username, @RequestParam("repo") String repo) {
+        ResponseEntity<Branch[]> response = this.gitService.getAllBranchesFromPublicRepos(username, repo);
+        return response.getBody();
+    }
 
-        return null;
+    @GetMapping("/git-repo/all/branches")
+    public Branch[] getAllBranchesFromAllRepos(@RequestHeader("token") String token, @RequestParam("username") String username, @RequestParam("repo") String repo) {
+        ResponseEntity<Branch[]> response = this.gitService.getAllBranchesFromRepo(token, username, repo);
+        return response.getBody();
     }
 }
