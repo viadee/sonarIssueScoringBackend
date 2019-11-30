@@ -1,49 +1,54 @@
 package de.viawhs.backend.rest;
 
+import de.viawhs.backend.model.Branch;
+import de.viawhs.backend.model.Repository;
+import de.viawhs.backend.model.User;
 import de.viawhs.backend.service.GitService;
-import de.viawhs.backend.service.GitServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static org.hamcrest.Matchers.containsString;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import java.util.Arrays;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(value = ServerController.class)
+@WebMvcTest(ServerController.class)
 public class ServerControllerTest {
     @Autowired
-    private MockMvc mvc;
+    MockMvc mockMvc;
 
     @MockBean
     private GitService gitService;
 
     @Test
     public void gitServerTest() throws Exception {
-        mvc.perform(
-                MockMvcRequestBuilders.get("/api/server/git-repo?username=trnhan251")
-                        .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-        gitService.getAllPublicRepositories("trnhan251");
-    }
+        User user = new User("trnhan251", 1, "github/trnhan251");
+        Branch branch1 = new Branch("master");
+        Repository[] repos = new Repository[]{
+                new Repository(1, "Test", "Test Repository", user, Arrays.asList(branch1))};
+        ResponseEntity<Repository[]> response = new ResponseEntity<Repository[]>(HttpStatus.ACCEPTED);
+        when(gitService.getAllPublicRepositories("trnhan251"))
+                .thenReturn(response);
 
-    public void getBranchesTest() throws Exception {
-        mvc.perform(
-                MockMvcRequestBuilders.get("/api/server/git-repo/branches?owner=trnhan251&repo=cs7dotnetcore2")
-                        .accept(MediaType.APPLICATION_JSON)).
-                andExpect(status().isOk());
+        RequestBuilder request = MockMvcRequestBuilders
+                                        .get("/server/git-repo/public?username=trnhan251")
+                                        .accept(MediaType.APPLICATION_JSON);
+        MvcResult mvcResult = mockMvc.perform(request)
+                                .andExpect(status().isOk())
+                                .andReturn();
     }
 }

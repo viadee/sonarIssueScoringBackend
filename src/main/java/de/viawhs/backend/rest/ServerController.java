@@ -2,15 +2,10 @@ package de.viawhs.backend.rest;
 
 import de.viawhs.backend.model.Branch;
 import de.viawhs.backend.model.Repository;
-import de.viawhs.backend.model.ServerInfo;
 import de.viawhs.backend.service.GitService;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/server")
