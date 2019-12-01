@@ -1,5 +1,6 @@
 package de.viawhs.backend.service;
 
+import de.viawhs.backend.model.Branch;
 import de.viawhs.backend.model.Repository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,14 +21,26 @@ public class GitServiceTest {
     private GitService gitService = new GitService();
 
     @Test
-    public void testGetAllPublicRepos() {
+    public void getAllPublicRepositories_Test() {
         Repository[] repos = gitService.getAllPublicRepositories("trnhan251");
         assertEquals(repos[0].getId(), 191923132);
     }
 
     @Test
-    public void testGetAllRepos() {
-        Repository[] repos = gitService.getAllRepositories("7a11ea674bcd7d473895ed8c9d492ecac1891938");
+    public void getAllRepositories_Test() {
+        Repository[] repos = gitService.getAllRepositories("fe08bf9d34635c26e308882db8f6e2930fc687b6");
         assertEquals(repos[0].getId(), 222391923);
+    }
+
+    @Test
+    public void getAllBranchesFromPublicRepos_Test() {
+        Branch[] branches = gitService.getAllBranchesFromPublicRepos("trnhan251", "AgilePPMTool");
+        assertEquals(branches.length, 1);
+    }
+
+    @Test
+    public void getAllBranchesFromRepo_Test() {
+        Branch[] branches = gitService.getAllBranchesFromRepo("fe08bf9d34635c26e308882db8f6e2930fc687b6", "trnhan251", "AgilePPMTool");
+        assertEquals(branches.length, 1);
     }
 }

@@ -67,4 +67,44 @@ public class ServerControllerTest {
                                         "]"))
                                 .andReturn();
     }
+
+    @Test
+    public void getAllBranchesFromPublicRepos_Test() throws Exception {
+        String username = "Test user";
+        String repository = "Test Repo";
+        Branch[] branches = new Branch[]{ new Branch("master")};
+        when(gitService.getAllBranchesFromPublicRepos(username, repository)).thenReturn(branches);
+        RequestBuilder request = MockMvcRequestBuilders
+                .get("/server/git-repo/public/branches")
+                .param("username", username)
+                .param("repo", repository)
+                .accept(MediaType.APPLICATION_JSON);
+        MvcResult mvcResult = mockMvc.perform(request)
+                                    .andExpect(status().isOk())
+                                    .andExpect(content().json("[" +
+                                            "{name:master}" +
+                                            "]"))
+                                    .andReturn();
+    }
+
+    @Test
+    public void getAllBranchesFromAllRepos_Test() throws Exception {
+        String token = "12345612121212121";
+        String username = "Test user";
+        String repository = "Test Repo";
+        Branch[] branches = new Branch[]{ new Branch("master")};
+        when(gitService.getAllBranchesFromRepo(token, username, repository)).thenReturn(branches);
+        RequestBuilder request = MockMvcRequestBuilders
+                .get("/server/git-repo/all/branches")
+                .header("token", token)
+                .param("username", username)
+                .param("repo", repository)
+                .accept(MediaType.APPLICATION_JSON);
+        MvcResult mvcResult = mockMvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(content().json("[" +
+                        "{name:master}" +
+                        "]"))
+                .andReturn();
+    }
 }

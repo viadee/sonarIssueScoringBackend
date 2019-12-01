@@ -33,13 +33,13 @@ public class ServerController {
 
     @GetMapping("/git-repo/public/branches")
     public Branch[] getAllBranchesFromPublicRepos(@RequestParam("username") String username, @RequestParam("repo") String repo) {
-        ResponseEntity<Branch[]> response = this.gitService.getAllBranchesFromPublicRepos(username, repo);
-        return response.getBody();
+        Branch[] results = this.gitService.getAllBranchesFromPublicRepos(username, repo);
+        return results;
     }
 
     @GetMapping("/git-repo/all/branches")
     public Branch[] getAllBranchesFromAllRepos(@RequestHeader("token") String token, @RequestParam("username") String username, @RequestParam("repo") String repo) {
-        ResponseEntity<Branch[]> response = this.gitService.getAllBranchesFromRepo(token, username, repo);
-        return response.getBody();
+        Branch[] results = this.gitService.getAllBranchesFromRepo(token, username, repo);
+        return results;
     }
 }

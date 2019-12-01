@@ -47,7 +47,7 @@ public class GitService {
         return responseEntity.getBody();
     }
 
-    public ResponseEntity<Branch[]> getAllBranchesFromPublicRepos(String username, String repo) {
+    public Branch[] getAllBranchesFromPublicRepos(String username, String repo) {
         String url = "https://api.github.com/repos/" + username + "/" + repo + "/branches";
         ResponseEntity<Branch[]> response = null;
         try {
@@ -55,10 +55,10 @@ public class GitService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return response;
+        return response.getBody();
     }
 
-    public ResponseEntity<Branch[]> getAllBranchesFromRepo(String token, String username, String repo) {
+    public Branch[] getAllBranchesFromRepo(String token, String username, String repo) {
         String url = "https://api.github.com/repos/" + username + "/" + repo + "/branches";
 
         HttpHeaders headers = new HttpHeaders();
@@ -72,7 +72,7 @@ public class GitService {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return response;
+        return response.getBody();
     }
 
     public ResponseEntity<Branch[]> getAllBranches(Repository repository) {
