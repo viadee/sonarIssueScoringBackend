@@ -20,15 +20,15 @@ public class ServerController {
     // Get all public repositories with a username
     @GetMapping("/git-repo/public")
     public Repository[] getAllPublicRepositories(@RequestParam("username") String username) {
-        ResponseEntity<Repository[]> response = this.gitService.getAllPublicRepositories(username);
-        return response.getBody();
+        Repository[] results = this.gitService.getAllPublicRepositories(username);
+        return results;
     }
 
     // Get all public and private repositories with a token
     @GetMapping("/git-repo/all")
     public Repository[] getAllRepositories(@RequestHeader("token") String token) {
-        ResponseEntity<Repository[]> response = this.gitService.getAllRepositories(token);
-        return response.getBody();
+        Repository[] results = this.gitService.getAllRepositories(token);
+        return results;
     }
 
     @GetMapping("/git-repo/public/branches")

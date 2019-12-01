@@ -23,21 +23,13 @@ public class GitService {
         restTemplate = new RestTemplate();
     }
 
-    public ResponseEntity<Repository[]> getAllPublicRepositories(String username) {
+    public Repository[] getAllPublicRepositories(String username) {
         String url = "https://api.github.com/users/" + username + "/repos";
         ResponseEntity<Repository[]> response = restTemplate.getForEntity(url, Repository[].class);
-
-        if (response.getBody() != null)
-            for (Repository repo : response.getBody()) {
-                ResponseEntity<Branch[]> branches = getAllBranches(repo);
-                if (branches != null)
-                    if (branches.getBody() != null)
-                        repo.setBranches(Arrays.asList(branches.getBody()));
-            }
-        return response;
+        return response.getBody();
     }
 
-    public ResponseEntity<Repository[]> getAllRepositories(String token) {
+    public Repository[] getAllRepositories(String token) {
         String url = "https://api.github.com/user/repos";
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer " + token);
@@ -52,7 +44,7 @@ public class GitService {
                         repo.setBranches(Arrays.asList(branches.getBody()));
             }
 
-        return responseEntity;
+        return responseEntity.getBody();
     }
 
     public ResponseEntity<Branch[]> getAllBranchesFromPublicRepos(String username, String repo) {

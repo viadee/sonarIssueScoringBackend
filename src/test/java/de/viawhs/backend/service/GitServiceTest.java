@@ -21,7 +21,13 @@ public class GitServiceTest {
 
     @Test
     public void testGetAllPublicRepos() {
-        Repository[] repos = gitService.getAllPublicRepositories("trnhan251").getBody();
+        Repository[] repos = gitService.getAllPublicRepositories("trnhan251");
         assertEquals(repos[0].getId(), 191923132);
+    }
+
+    @Test
+    public void testGetAllRepos() {
+        Repository[] repos = gitService.getAllRepositories("7a11ea674bcd7d473895ed8c9d492ecac1891938");
+        assertEquals(repos[0].getId(), 222391923);
     }
 }
