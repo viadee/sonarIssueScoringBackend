@@ -6,7 +6,6 @@ import de.viawhs.backend.model.User;
 import de.viawhs.backend.service.GitService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -25,8 +24,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(ServerController.class)
-public class ServerControllerTest {
+@WebMvcTest(GitServerController.class)
+public class GitServerControllerTest {
     @Autowired
     MockMvc mockMvc;
 
@@ -34,7 +33,7 @@ public class ServerControllerTest {
     private GitService gitService;
 
     private Repository[] repos;
-    public ServerControllerTest() {
+    public GitServerControllerTest() {
         User user = new User("trnhan251", 1, "github/trnhan251");
         Branch branch = new Branch("master");
         repos = new Repository[]{new Repository(1, "Test", "Test Repository", user, Arrays.asList(branch))};
