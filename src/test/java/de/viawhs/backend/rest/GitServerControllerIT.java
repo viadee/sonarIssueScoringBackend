@@ -52,6 +52,16 @@ public class GitServerControllerIT {
                 entity,
                 String.class);
         JSONAssert.assertEquals("[{id:194104724}, {id:141591060}, {id:217829110}, {id:218061522}]", responseallrepositories.getBody(), false);
+
+        headers = new HttpHeaders();
+        headers.set("token", "1234567890");
+        entity = new HttpEntity(headers);
+        ResponseEntity<String> responseAllRepositoriesWrongToken = this.restTemplate.exchange(
+                "http://localhost:3000/server/git-repo/all",
+                HttpMethod.GET,
+                entity,
+                String.class);
+        JSONAssert.assertEquals("{status: 500}", responseAllRepositoriesWrongToken.getBody(), false);
         /*End Tests: Getting all public and private repositories with a token string*/
 
 
