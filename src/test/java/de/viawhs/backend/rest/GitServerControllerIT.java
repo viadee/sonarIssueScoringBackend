@@ -7,6 +7,10 @@ import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
@@ -38,6 +42,19 @@ public class GitServerControllerIT {
         /*End Tests: Getting all public repositories*/
 
 
+        /*Beginning Tests: Getting all public and private repositories with a token string*/
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("token", "98e129228e935775e8a61ed126d29972e72062b0" );
+        HttpEntity entity = new HttpEntity (headers);
+        ResponseEntity<String> responseallrepositories = this.restTemplate.exchange(
+                "http://localhost:3000/server/git-repo/all" ,
+                HttpMethod.GET,
+                entity,
+                String.class);
+        JSONAssert.assertEquals("[{id:194104724}, {id:141591060}, {id:217829110}, {id:218061522}]", responseallrepositories.getBody(), false);
+        /*End Tests: Getting all public and private repositories with a token string*/
+
+
         /*Beginning Tests: Getting all branches of a public repository*/
         String responseBranchesPublic = this.restTemplate.getForObject(
                 "http://localhost:3000/server/git-repo/public/branches?username=trnhan251&repo=sonarIssueScoringBackend",
@@ -49,6 +66,18 @@ public class GitServerControllerIT {
         JSONAssert.assertEquals("{status:500}", responseWrongBranchPublic, false);
         /*End Tests: Getting all branches of a public repository*/
 
+
+        /*Beginning Tests: Getting all branches of a public or private repository from a user with username and token*/
+        HttpHeaders headersuser = new HttpHeaders();
+        headersuser.set("token", "98e129228e935775e8a61ed126d29972e72062b0" );
+        HttpEntity entityuser = new HttpEntity (headersuser);
+        ResponseEntity<String> responseallrepositoriesuser = this.restTemplate.exchange(
+                "http://localhost:3000/server/git-repo/all/branches?username=k-backes&repo=sonarIssueScoringBackend" ,
+                HttpMethod.GET,
+                entityuser,
+                String.class);
+        JSONAssert.assertEquals("{}", responseallrepositoriesuser.getBody(), false);
+        /*End Tests: Getting all branches of a public or private repository from a user with username and token*/
     }
 
 }
