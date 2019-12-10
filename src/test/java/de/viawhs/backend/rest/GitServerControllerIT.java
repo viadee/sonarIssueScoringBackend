@@ -44,7 +44,7 @@ public class GitServerControllerIT {
 
         /*Beginning Tests: Getting all public and private repositories with a token string*/
         HttpHeaders headers = new HttpHeaders();
-        headers.set("token", "98e129228e935775e8a61ed126d29972e72062b0" );
+        headers.set("token", "19abe638a80559a5f9d038 6e727a9f561b0965c6" );
         HttpEntity entity = new HttpEntity (headers);
         ResponseEntity<String> responseallrepositories = this.restTemplate.exchange(
                 "http://localhost:3000/server/git-repo/all" ,
@@ -79,7 +79,7 @@ public class GitServerControllerIT {
 
         /*Beginning Tests: Getting all branches of a public or private repository from a user with username and token*/
         HttpHeaders headersuser = new HttpHeaders();
-        headersuser.set("token", "98e129228e935775e8a61ed126d29972e72062b0" );
+        headersuser.set("token", "19abe638a80559a5f9d 0386e727a9f561b0965c6" );
         HttpEntity entityuser = new HttpEntity (headersuser);
         ResponseEntity<String> responseallrepositoriesuser = this.restTemplate.exchange(
                 "http://localhost:3000/server/git-repo/all/branches?username=k-backes&repo=sonarIssueScoringBackend" ,

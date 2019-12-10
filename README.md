@@ -13,4 +13,3 @@ Get all branches of a public or private repository from a user with username and
 
 
 
- Token für GitServerControllerIT f4852cd4c705e957a80228943fc54e9d424569a8c
