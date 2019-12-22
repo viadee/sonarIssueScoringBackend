@@ -12,4 +12,3 @@ Get all branches of a public repository from a user with username
 Get all branches of a public or private repository from a user with username and token
 
 
-
