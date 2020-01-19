@@ -49,7 +49,7 @@ public class GitServerControllerIT {
         JSONAssert.assertEquals("[{name:master}]", responseBranchesPublic, false);
 
         String responseWrongBranchPublic = this.restTemplate.getForObject(
-                "http://localhost:3000/server/git-repo/public/branches?username=trnhan251&repo=wrongbranchname", String.class);
+                "http://localhost:3000/server/git-repo/public/branches?username=Testuser5678&repo=wrongbranchname", String.class);
         JSONAssert.assertEquals("{status:500}", responseWrongBranchPublic, false);
         /*End Tests: Getting all branches of a public repository*/
 
