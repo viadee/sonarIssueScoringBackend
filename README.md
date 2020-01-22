@@ -13,6 +13,7 @@ Get all branches of a public or private repository from a user with username and
 
 Github account Testuser:
 e-mail: testuser567@web.de  
+password e-mail: TestUser:D1
 username: Testuser5678
-passwort: TestUser:D1
+password: TestUser:D1
 

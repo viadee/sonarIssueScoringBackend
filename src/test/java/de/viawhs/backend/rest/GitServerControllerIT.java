@@ -25,9 +25,9 @@ public class GitServerControllerIT {
 
         /*Beginning Tests: Getting all public repositories*/
         String responsePublicReposFilled = this.restTemplate.getForObject(
-                "http://localhost:3000/server/git-repo/public?username=trnhan251", String.class);
+                "http://localhost:3000/server/git-repo/public?username=Testuser5678", String.class);
         JSONAssert.assertEquals(
-                "[{id:191923132}, {id:181204192}, {id:203966717}, {id:215288135}]",
+                "[{id:235550014}, {id:234971741} ]",
                 responsePublicReposFilled,
                 false);
 
@@ -44,9 +44,9 @@ public class GitServerControllerIT {
 
         /*Beginning Tests: Getting all branches of a public repository*/
         String responseBranchesPublic = this.restTemplate.getForObject(
-                "http://localhost:3000/server/git-repo/public/branches?username=trnhan251&repo=sonarIssueScoringBackend",
+                "http://localhost:3000/server/git-repo/public/branches?username=Testuser5678&repo=helloworld",
                 String.class);
-        JSONAssert.assertEquals("[{name:master}]", responseBranchesPublic, false);
+        JSONAssert.assertEquals("[]", responseBranchesPublic, false);
 
         String responseWrongBranchPublic = this.restTemplate.getForObject(
                 "http://localhost:3000/server/git-repo/public/branches?username=Testuser5678&repo=wrongbranchname", String.class);
