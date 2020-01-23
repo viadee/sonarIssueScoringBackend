@@ -16,7 +16,6 @@ import java.util.List;
 
 @Service
 public class GitService {
-    private ServerInfo gitServer;
     private RestTemplate restTemplate;
 
     public GitService() {
