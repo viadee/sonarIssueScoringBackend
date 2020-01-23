@@ -3,9 +3,16 @@ package de.viawhs.backend.service;
 import de.viawhs.backend.model.ServerInfo;
 import de.viawhs.backend.model.Wizard;
 import net.minidev.json.JSONObject;
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 @Service
 public class AnalyticsService {
@@ -44,6 +51,18 @@ public class AnalyticsService {
         HttpEntity<String> entity = new HttpEntity<String>(object.toString(), headers);
         ResponseEntity<String> responseEntity = restTemplate.postForEntity(url, entity, String.class);
         return responseEntity.getBody();
+    }
+
+    public boolean saveStringToFile(String text, String name) {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/java/de/viawhs/backend/results/" + name));
+            writer.write(text);
+            writer.close();
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
     }
 
 }

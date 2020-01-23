@@ -2,10 +2,7 @@ package de.viawhs.backend.rest;
 
 import de.viawhs.backend.model.Wizard;
 import de.viawhs.backend.service.AnalyticsService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/server/analytics")
@@ -24,5 +21,10 @@ public class AnalyticsController {
     @PostMapping("/ordering-issues")
     public String orderingIssues(@RequestBody Wizard wizard) {
         return this.analyticsService.orderingIssues(wizard);
+    }
+
+    @PostMapping("/save-result")
+    public boolean savingResult(@RequestBody String result, @RequestParam String name) {
+        return this.analyticsService.saveStringToFile(result, name);
     }
 }
