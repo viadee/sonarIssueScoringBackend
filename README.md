@@ -11,4 +11,9 @@ Get all branches of a public repository from a user with username
 `http://localhost:3000/server/git-repo/all/branches?username={USERNAME}&repo={REPO_NAME}` with `header (token = {TOKEN}`:
 Get all branches of a public or private repository from a user with username and token
 
+Github account Testuser:
+e-mail: testuser567@web.de  
+password e-mail: TestUser:D1
+username: Testuser5678
+password: TestUser:D1
 

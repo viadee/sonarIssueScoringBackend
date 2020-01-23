@@ -44,7 +44,5 @@ public class AnalyticsService {
         HttpEntity<String> entity = new HttpEntity<String>(object.toString(), headers);
         ResponseEntity<String> responseEntity = restTemplate.postForEntity(url, entity, String.class);
         return responseEntity.getBody();
-        //ResponseEntity<DesirabilityResult> responseEntity = restTemplate.postForEntity(url, entity, DesirabilityResult.class);
-        //return responseEntity.getBody();
     }
 }
