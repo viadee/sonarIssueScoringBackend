@@ -19,30 +19,31 @@ public class AnalyticsService {
         String url = "http://localhost:5432/files/predict";
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
+
         JSONObject object = new JSONObject();
-        object.put("predictionHorizon", 256);
-        ServerInfo serverInfo = new ServerInfo("https://github.com/apache/commons-io");
-        object.put("gitServer", serverInfo);
-        object.put("h2oUrl", "http://localhost:54321");
-        HttpEntity<String> entity = new HttpEntity<String>(object.toString(), headers);
-        ResponseEntity<String> responseEntity = restTemplate.postForEntity(url, entity, String.class);
-        return responseEntity.getBody();
+        return getResult(wizard, url, headers, object);
     }
 
     public String orderingIssues(Wizard wizard) {
         String url = "http://localhost:5432/issues/desirability";
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
+
         JSONObject object = new JSONObject();
         ServerInfo sonarServer = new ServerInfo("https://sonarcloud.io");
         object.put("sonarServer", sonarServer);
         object.put("sonarProjectId", "commons-io_180410");
-        object.put("predictionHorizon", 256);
-        ServerInfo gitServer = new ServerInfo("https://github.com/apache/commons-io");
-        object.put("gitServer", gitServer);
-        object.put("h2oUrl", "http://localhost:54321");
+        return getResult(wizard, url, headers, object);
+    }
+
+    private String getResult(Wizard wizard, String url, HttpHeaders headers, JSONObject object) {
+        object.put("predictionHorizon", wizard.getPredictionHorizon());
+        object.put("gitServer", wizard.getGitServer());
+        object.put("h2oUrl", wizard.getH2oUrl());
+
         HttpEntity<String> entity = new HttpEntity<String>(object.toString(), headers);
         ResponseEntity<String> responseEntity = restTemplate.postForEntity(url, entity, String.class);
         return responseEntity.getBody();
     }
+
 }
