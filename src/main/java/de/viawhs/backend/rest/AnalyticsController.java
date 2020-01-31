@@ -23,8 +23,4 @@ public class AnalyticsController {
         return this.analyticsService.orderingIssues(wizard);
     }
 
-    @PostMapping("/save-result")
-    public boolean savingResult(@RequestBody String result, @RequestParam String name) {
-        return this.analyticsService.saveStringToFile(result, name);
-    }
 }

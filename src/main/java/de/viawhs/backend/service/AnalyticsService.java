@@ -52,17 +52,4 @@ public class AnalyticsService {
         ResponseEntity<String> responseEntity = restTemplate.postForEntity(url, entity, String.class);
         return responseEntity.getBody();
     }
-
-    public boolean saveStringToFile(String text, String name) {
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/java/de/viawhs/backend/results/" + name));
-            writer.write(text);
-            writer.close();
-            return true;
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            return false;
-        }
-    }
-
 }
