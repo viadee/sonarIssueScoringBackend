@@ -6,6 +6,7 @@ import de.viawhs.backend.service.AnalyticsService;
 import de.viawhs.backend.service.FileService;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -22,9 +23,11 @@ public class AnalyticsController {
 
     @PostMapping("/change-count")
     public String predictChangeCount(@RequestBody Wizard wizard) {
-        String result = this.analyticsService.predictChangeCount(wizard);
+        //String result = this.analyticsService.predictChangeCount(wizard);
+        String result = "Test";
         date = Calendar.getInstance().getTime();
-        ResultFile resultFile = new ResultFile(wizard.getUser(), date.toString(), wizard.getUrl().split("/")[wizard.getUrl().split("/").length-1], result);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy-hh:mm:ss");
+        ResultFile resultFile = new ResultFile(wizard.getUser(), dateFormat.format(date), wizard.getUrl().split("/")[wizard.getUrl().split("/").length-1], result);
         fileService.saveResultFile(resultFile);
         return result;
     }
@@ -33,7 +36,8 @@ public class AnalyticsController {
     public String orderingIssues(@RequestBody Wizard wizard) {
         String result = this.analyticsService.orderingIssues(wizard);
         date = Calendar.getInstance().getTime();
-        ResultFile resultFile = new ResultFile(wizard.getUser(), date.toString(), wizard.getUrl().split("/")[wizard.getUrl().split("/").length-1], result);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy-hh:mm:ss");
+        ResultFile resultFile = new ResultFile(wizard.getUser(), dateFormat.format(date), wizard.getUrl().split("/")[wizard.getUrl().split("/").length-1], result);
         fileService.saveResultFile(resultFile);
         return result;
     }
