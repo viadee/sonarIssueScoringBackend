@@ -18,6 +18,11 @@ public class FileController {
         this.fileService = fileService;
     }
 
+    @GetMapping("/all-results")
+    public List<ResultFile> getAllResultFiles() {
+        return this.fileService.getAllResultFiles(DIRECTORY);
+    }
+
     @GetMapping("/all")
     public List<String> getAllFiles() {
         return this.fileService.getAllFilesInDirectory(DIRECTORY);

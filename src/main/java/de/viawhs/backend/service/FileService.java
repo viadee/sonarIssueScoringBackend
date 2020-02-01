@@ -10,6 +10,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -52,6 +53,20 @@ public class FileService {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public List<ResultFile> getAllResultFiles(String dir) {
+        List<ResultFile> results = new ArrayList<>();
+        List<String> fileNames = getAllFilesInDirectory(dir);
+        for (String fileName : fileNames) {
+            String result = readFile(dir + "/" + fileName);
+            String username = fileName.split("_")[0];
+            String date = fileName.split("_")[1];
+            String repository = fileName.split("_")[2];
+            ResultFile resultFile = new ResultFile(username, date, repository, result);
+            results.add(resultFile);
+        }
+        return results;
     }
 
 
