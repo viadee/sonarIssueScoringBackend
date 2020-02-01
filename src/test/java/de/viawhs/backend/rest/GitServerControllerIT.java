@@ -20,40 +20,34 @@ public class GitServerControllerIT {
     @Autowired
     private TestRestTemplate restTemplate;
 
+    /* Getting all public repositories*/
     @Test
-    public void contextLoad() throws JSONException {
-
-        /*Beginning Tests: Getting all public repositories*/
+    public void testPublicRepos() throws JSONException {
         String responsePublicReposFilled = this.restTemplate.getForObject(
                 "http://localhost:3000/server/git-repo/public?username=Testuser5678", String.class);
         JSONAssert.assertEquals(
                 "[{id:235550014}, {id:235558785} ]",
                 responsePublicReposFilled,
                 false);
+    }
 
+    /*Getting public repositories with empty git account*/
+    @Test
+    public void testPublicReposEmpty() throws JSONException {
         String responsePublicReposEmpty = this.restTemplate.getForObject(
                 "http://localhost:3000/server/git-repo/public?username=k-backes", String.class);
         JSONAssert.assertEquals(
                 "[]", responsePublicReposEmpty, false);
-
-        String responsePublicWrongUser = this.restTemplate.getForObject(
-                "http://localhost:3000/server/git-repo/public?username=khfslhdfhsdfhdsfhdfjdfjdjfhsdfk", String.class);
-        JSONAssert.assertEquals("{status:500}", responsePublicWrongUser, false);
-        /*End Tests: Getting all public repositories*/
+    }
 
 
-        /*Beginning Tests: Getting all branches of a public repository*/
+    /*Getting all branches of a public repository*/
+    @Test
+    public void testAllPublicBranches() throws JSONException {
         String responseBranchesPublic = this.restTemplate.getForObject(
                 "http://localhost:3000/server/git-repo/public/branches?username=Testuser5678&repo=testrepository",
                 String.class);
         JSONAssert.assertEquals("[{name:master}]", responseBranchesPublic, false);
-
-        String responseWrongBranchPublic = this.restTemplate.getForObject(
-                "http://localhost:3000/server/git-repo/public/branches?username=Testuser5678&repo=wrongbranchname", String.class);
-        JSONAssert.assertEquals("{status:500}", responseWrongBranchPublic, false);
-        /*End Tests: Getting all branches of a public repository*/
-
-
 
     }
 
