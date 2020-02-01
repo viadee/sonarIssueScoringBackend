@@ -44,9 +44,13 @@ public class AnalyticsService {
     }
 
     private String getResult(Wizard wizard, String url, HttpHeaders headers, JSONObject object) {
-        object.put("predictionHorizon", wizard.getPredictionHorizon());
-        object.put("gitServer", wizard.getGitServer());
-        object.put("h2oUrl", wizard.getH2oUrl());
+        object.put("predictionHorizon", wizard.getHorizon());
+
+        ServerInfo gitServer = new ServerInfo(wizard.getUrl());
+        object.put("gitServer", gitServer);
+
+        String h2oUrl = wizard.getH2o()+ ":" + wizard.getPort();
+        object.put("h2oUrl", h2oUrl);
 
         HttpEntity<String> entity = new HttpEntity<String>(object.toString(), headers);
         ResponseEntity<String> responseEntity = restTemplate.postForEntity(url, entity, String.class);
