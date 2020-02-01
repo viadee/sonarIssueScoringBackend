@@ -1,5 +1,6 @@
 package de.viawhs.backend.rest;
 
+import de.viawhs.backend.model.ResultFile;
 import de.viawhs.backend.service.FileService;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,4 +33,8 @@ public class FileController {
         return this.fileService.saveStringToFile(result, name, DIRECTORY);
     }
 
+    @PostMapping("/save-result-file")
+    public boolean saveResultFile(@RequestBody ResultFile file) {
+        return this.fileService.saveResultFile(file);
+    }
 }

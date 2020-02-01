@@ -1,5 +1,6 @@
 package de.viawhs.backend.service;
 
+import de.viawhs.backend.model.ResultFile;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedWriter;
@@ -15,11 +16,25 @@ import java.util.stream.Stream;
 
 @Service
 public class FileService {
+    private final String DIRECTORY = "src/main/java/de/viawhs/backend/results/";
 
     public boolean saveStringToFile(String text, String name, String dir) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(dir + name));
             writer.write(text);
+            writer.close();
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean saveResultFile(ResultFile file) {
+        try {
+            String name = file.getName() + "_" + file.getDate() + "_" + file.getRepository();
+            BufferedWriter writer = new BufferedWriter(new FileWriter(DIRECTORY + name));
+            writer.write(file.getResult());
             writer.close();
             return true;
         } catch (Exception ex) {
