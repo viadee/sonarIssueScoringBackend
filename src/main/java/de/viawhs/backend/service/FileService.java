@@ -33,7 +33,7 @@ public class FileService {
     public boolean saveResultFile(ResultFile file) {
         try {
             String name = file.getName() + "_" + file.getDate() + "_" + file.getRepository();
-            BufferedWriter writer = new BufferedWriter(new FileWriter(DIRECTORY + name));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(DIRECTORY + name + ".txt"));
             writer.write(file.getResult());
             writer.close();
             return true;
