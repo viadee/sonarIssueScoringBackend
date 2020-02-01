@@ -23,10 +23,9 @@ public class AnalyticsController {
 
     @PostMapping("/change-count")
     public String predictChangeCount(@RequestBody Wizard wizard) {
-        //String result = this.analyticsService.predictChangeCount(wizard);
-        String result = "Test";
+        String result = this.analyticsService.predictChangeCount(wizard);
         date = Calendar.getInstance().getTime();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy-hh:mm:ss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss");
         ResultFile resultFile = new ResultFile(wizard.getUser(), dateFormat.format(date), wizard.getUrl().split("/")[wizard.getUrl().split("/").length-1], result);
         fileService.saveResultFile(resultFile);
         return result;
@@ -36,7 +35,7 @@ public class AnalyticsController {
     public String orderingIssues(@RequestBody Wizard wizard) {
         String result = this.analyticsService.orderingIssues(wizard);
         date = Calendar.getInstance().getTime();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy-hh:mm:ss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss");
         ResultFile resultFile = new ResultFile(wizard.getUser(), dateFormat.format(date), wizard.getUrl().split("/")[wizard.getUrl().split("/").length-1], result);
         fileService.saveResultFile(resultFile);
         return result;
