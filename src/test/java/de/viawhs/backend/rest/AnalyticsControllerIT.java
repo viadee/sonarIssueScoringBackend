@@ -1,10 +1,13 @@
 package de.viawhs.backend.rest;
 
+import de.viawhs.backend.service.AnalyticsService;
+import de.viawhs.backend.service.FileService;
 import net.minidev.json.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -18,11 +21,15 @@ public class AnalyticsControllerIT {
     @Autowired
     MockMvc mockMvc;
 
+    @MockBean
+    private AnalyticsService analyticsService;
+
+    @MockBean
+    private FileService fileService;
 
     @Test
     public void testChangeCount() throws Exception{
         JSONObject testObject=new JSONObject();
-        String content = testObject.toString();
         testObject.put("url", "https://github.com/apache/commons-io");
         testObject.put("user", "Testuser5678");
         testObject.put("branch","master");
