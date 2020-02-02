@@ -4,27 +4,25 @@ import net.minidev.json.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import static org.junit.Assert.assertEquals;
+import org.springframework.test.web.servlet.MockMvc;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@WebMvcTest(AnalyticsController.class)
 public class AnalyticsControllerIT {
 
     @Autowired
-    private TestRestTemplate restTemplate;
+    MockMvc mockMvc;
+
 
     @Test
     public void testChangeCount() throws Exception{
-        HttpHeaders headers= new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
         JSONObject testObject=new JSONObject();
+        String content = testObject.toString();
         testObject.put("url", "https://github.com/apache/commons-io");
         testObject.put("user", "Testuser5678");
         testObject.put("branch","master");
@@ -41,9 +39,9 @@ public class AnalyticsControllerIT {
         testObject.put("author", false);
         testObject.put("comments", false);
         testObject.put("weekday", false);
-
-        HttpEntity<String> request=new HttpEntity<String>(testObject.toString(),headers);
-        String result = this.restTemplate.postForObject("http://localhost:3000/server/analytics/change-count",request,String.class);
-        assertEquals("Test",result);
+        mockMvc.perform(
+                post("/server/analytics/change-count")
+                        .contentType(MediaType.APPLICATION_JSON).content(String.valueOf(testObject)))
+                        .andExpect(status().isOk());
     }
 }
