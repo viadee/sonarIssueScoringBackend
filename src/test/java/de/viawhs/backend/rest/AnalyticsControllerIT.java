@@ -28,15 +28,9 @@ public class AnalyticsControllerIT {
     @MockBean
     private FileService fileService;
 
-    @Test
-    public void noDatas() throws Exception {
-        mockMvc.perform(
-                post("/server/analytics/change-count"))
-                .andExpect(status().isBadRequest());
-    }
+    JSONObject testObject = createtestObject();
 
-    @Test
-    public void testChangeCount() throws Exception {
+    public JSONObject createtestObject() {
         JSONObject testObject = new JSONObject();
         testObject.put("url", "https://github.com/apache/commons-io");
         testObject.put("user", "Testuser5678");
@@ -54,9 +48,37 @@ public class AnalyticsControllerIT {
         testObject.put("author", false);
         testObject.put("comments", false);
         testObject.put("weekday", false);
+        return testObject;
+    }
+
+    @Test
+    public void changeCountNoData() throws Exception {
+        mockMvc.perform(
+                post("/server/analytics/change-count"))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void testChangeCount() throws Exception {
         mockMvc.perform(
                 post("/server/analytics/change-count")
                         .contentType(MediaType.APPLICATION_JSON).content(String.valueOf(testObject)))
                 .andExpect(status().isOk());
     }
+
+    @Test
+    public void orderingIssuesNoData() throws Exception {
+        mockMvc.perform(
+                post("/server/analytics/ordering-issues"))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void testOrderingIssues() throws Exception{
+        mockMvc.perform(
+                post("/server/analytics/ordering-issues ")
+                        .contentType(MediaType.APPLICATION_JSON).content(String.valueOf(testObject)))
+                .andExpect(status().isOk());
+    }
+
 }
