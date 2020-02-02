@@ -42,14 +42,14 @@ public class FileControllerIT {
     @Test
     public void testReadFile() throws Exception {
         mockMvc.perform(
-                get("/server/files?name=testFile.txt"))
+                get("/server/files?name=testFile"))
                 .andExpect(status().isOk());
     }
 
     @Test
     public void testSaveResults() throws Exception{
         String test="This is the result of saving in this file.";
-        mockMvc.perform(post("/server/files/save-result?name=testFile.txt")
+        mockMvc.perform(post("/server/files/save-result?name=testFile")
                 .contentType(MediaType.TEXT_HTML).content(test))
                 .andExpect(status().isOk());
     }
