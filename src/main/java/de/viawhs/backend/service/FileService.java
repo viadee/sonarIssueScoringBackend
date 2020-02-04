@@ -59,6 +59,8 @@ public class FileService {
         List<ResultFile> results = new ArrayList<>();
         List<String> fileNames = getAllFilesInDirectory(dir);
         for (String fileName : fileNames) {
+            fileName = fileName.replace('\\', '/');
+            fileName = fileName.split("/")[fileName.split("/").length - 1];
             String result = readFile(dir + "/" + fileName);
             String username = fileName.split("_")[0];
             String date = fileName.split("_")[1];
