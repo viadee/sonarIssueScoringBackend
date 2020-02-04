@@ -40,28 +40,6 @@ public class FileControllerIT {
     }
 
     @Test
-    public void testReadFile() throws Exception {
-        mockMvc.perform(
-                get("/server/files?name=testFile"))
-                .andExpect(status().isOk());
-    }
-
-    @Test
-    public void testSaveResultsNoData() throws Exception{
-        mockMvc.perform(
-                post("/server/files/save-result?name=testFile"))
-                .andExpect(status().isBadRequest());
-    }
-
-    @Test
-    public void testSaveResults() throws Exception{
-        String test="This is the result of saving in this file.";
-        mockMvc.perform(post("/server/files/save-result?name=testFile")
-                .contentType(MediaType.TEXT_HTML).content(test))
-                .andExpect(status().isOk());
-    }
-
-    @Test
     public void testSaveResultFilesNoData() throws Exception{
         mockMvc.perform(
                 post("/server/files/save-result-file"))
@@ -71,7 +49,7 @@ public class FileControllerIT {
     @Test
     public void testSaveResultFiles() throws Exception{
         JSONObject testObject= new JSONObject();
-        testObject.put("name","testFile");
+        testObject.put("name","apache");
         testObject.put("date","01-02-2020-07-40-43");
         testObject.put("repository","commons-io.txt");
         testObject.put("result","");
