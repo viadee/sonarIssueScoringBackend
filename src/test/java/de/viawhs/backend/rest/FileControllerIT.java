@@ -32,12 +32,15 @@ public class FileControllerIT {
                 .andExpect(status().isOk());
     }
 
+
     @Test
     public void testAllResults() throws Exception {
         mockMvc.perform(
                 get("/server/files/all-results"))
                 .andExpect(status().isOk());
     }
+
+
 
     @Test
     public void testSaveResultFilesNoData() throws Exception{
