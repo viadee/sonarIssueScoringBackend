@@ -11,6 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -58,6 +59,7 @@ public class FileService {
     public List<ResultFile> getAllResultFiles(String dir) {
         List<ResultFile> results = new ArrayList<>();
         List<String> fileNames = getAllFilesInDirectory(dir);
+        Collections.sort(fileNames);
         for (String fileName : fileNames) {
             fileName = fileName.replace('\\', '/');
             fileName = fileName.split("/")[fileName.split("/").length - 1];
@@ -85,4 +87,5 @@ public class FileService {
         }
         return contentBuilder.toString();
     }
+
 }
