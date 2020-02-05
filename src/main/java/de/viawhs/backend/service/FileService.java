@@ -10,9 +10,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -66,6 +65,13 @@ public class FileService {
             String result = readFile(dir + "/" + fileName);
             String username = fileName.split("_")[0];
             String date = fileName.split("_")[1];
+            String[] dateInfos = date.split("-");
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(Integer.parseInt(dateInfos[2]), Integer.parseInt(dateInfos[1]), Integer.parseInt(dateInfos[0]),
+                    Integer.parseInt(dateInfos[3]), Integer.parseInt(dateInfos[4]), Integer.parseInt(dateInfos[5]));
+            Date d = calendar.getTime();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+            date = dateFormat.format(d);
             String repository = fileName.split("_")[2];
             ResultFile resultFile = new ResultFile(username, date, repository, result);
             results.add(resultFile);

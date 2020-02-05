@@ -1,0 +1,110 @@
+Validation Metrics:
+              Metric | Value
+---------------------+------
+MeanResidualDeviance | 0.057
+                  R2 | -1.095
+                RMSE | 0.238
+
+Validationvariable importances:
+                     Variable | Importance
+------------------------------+-----------
+                      package | 0.251
+                       prefix | 0.117
+                  linesOfCode | 0.109
+              numberOfMethods | 0.083
+         cyclomaticComplexity | 0.073
+         dependenciesExternal | 0.063
+          dependenciesProject | 0.059
+     previousAuthorTotalEdits | 0.057
+             numberOfComments | 0.044
+    commitAgeClass.LastCommit | 0.042
+                       suffix | 0.027
+        commitAgeClass.Minus1 | 0.017
+      commitAgePackage.Minus1 | 0.017
+               totalEditCount | 0.014
+      commitAgePackage.Minus2 | 0.013
+  commitAgePackage.LastCommit | 0.009
+previousAuthorCommitTimeOfDay | 0.007
+        commitAgeClass.Minus2 | 0.000
+        commitAgeClass.Minus4 | 0.000
+        commitAgeClass.Minus8 | 0.000
+       commitAgeClass.Minus16 | 0.000
+      commitAgePackage.Minus4 | 0.000
+      commitAgePackage.Minus8 | 0.000
+     commitAgePackage.Minus16 | 0.000
+               previousAuthor | 0.000
+  previousAuthorThisFileEdits | 0.000
+             totalAuthorCount | 0.000
+  previousAuthorCommitWeekday | 0.000
+                   dependants | 0.000
+                       random | 0.000
+
+Predictions:
+                                                                                                          File | Predicted change
+---------------------------------------------------------------------------------------------------------------+-----------------
+                         src/main/java/de/viadee/sonarissuescoring/service/desirability/IssueDesirability.java | 0.670
+                                src/main/java/de/viadee/sonarissuescoring/service/desirability/ServerInfo.java | 0.660
+                     src/main/java/de/viadee/sonarissuescoring/service/prediction/extract/TargetExtractor.java | 0.616
+                                    src/main/java/de/viadee/sonarissuescoring/service/desirability/Rating.java | 0.612
+                    src/main/java/de/viadee/sonarissuescoring/service/prediction/load/CommitHistoryReader.java | 0.610
+                        src/main/java/de/viadee/sonarissuescoring/service/prediction/load/RepositoryCache.java | 0.605
+                          src/main/java/de/viadee/sonarissuescoring/service/prediction/train/CsvConverter.java | 0.604
+                                src/main/java/de/viadee/sonarissuescoring/service/prediction/load/GitPath.java | 0.603
+                        src/main/java/de/viadee/sonarissuescoring/service/prediction/train/ExtendedH2oApi.java | 0.591
+                           src/main/java/de/viadee/sonarissuescoring/service/desirability/UserPreferences.java | 0.587
+                            src/main/java/de/viadee/sonarissuescoring/service/prediction/EvaluationResult.java | 0.580
+                           src/main/java/de/viadee/sonarissuescoring/service/prediction/PredictionService.java | 0.577
+              src/main/java/de/viadee/sonarissuescoring/service/prediction/extract/source/DependencyGraph.java | 0.576
+                              src/main/java/de/viadee/sonarissuescoring/service/prediction/extract/Output.java | 0.570
+       src/main/java/de/viadee/sonarissuescoring/service/prediction/extract/AbstractPrefixSuffixExtractor.java | 0.558
+              src/main/java/de/viadee/sonarissuescoring/service/prediction/extract/source/MutableAnalysis.java | 0.558
+                        src/main/java/de/viadee/sonarissuescoring/service/desirability/DesirabilityResult.java | 0.548
+                                                      src/main/java/de/viadee/sonarissuescoring/Evaluator.java | 0.543
+                                 src/main/java/de/viadee/sonarissuescoring/service/prediction/load/Commit.java | 0.539
+                                src/main/java/de/viadee/sonarissuescoring/service/prediction/ModelMetrics.java | 0.523
+                                   src/main/java/de/viadee/sonarissuescoring/web/ToStringMessageConverter.java | 0.522
+                 src/main/java/de/viadee/sonarissuescoring/service/prediction/extract/CommitTimeExtractor.java | 0.503
+            src/main/java/de/viadee/sonarissuescoring/service/prediction/extract/source/DependencyVisitor.java | 0.487
+                              src/main/java/de/viadee/sonarissuescoring/service/prediction/train/Instance.java | 0.473
+                               src/main/java/de/viadee/sonarissuescoring/service/prediction/train/MLInput.java | 0.472
+                            src/main/java/de/viadee/sonarissuescoring/service/prediction/PredictionResult.java | 0.464
+              src/main/java/de/viadee/sonarissuescoring/service/prediction/load/RepositorySnapshotCreator.java | 0.459
+                       src/main/java/de/viadee/sonarissuescoring/service/prediction/load/TreeFilterSource.java | 0.449
+             src/main/java/de/viadee/sonarissuescoring/service/desirability/calculation/RatingProviderTag.java | 0.447
+                src/main/java/de/viadee/sonarissuescoring/service/prediction/extract/AbstractAgeExtractor.java | 0.434
+                             src/main/java/de/viadee/sonarissuescoring/service/prediction/FileInformation.java | 0.426
+             src/main/java/de/viadee/sonarissuescoring/service/prediction/extract/source/TempSourceFolder.java | 0.426
+                                    src/main/java/de/viadee/sonarissuescoring/web/EvaluationResultPrinter.java | 0.423
+                  src/main/java/de/viadee/sonarissuescoring/service/prediction/train/FilePredictionParams.java | 0.419
+                               src/main/java/de/viadee/sonarissuescoring/service/prediction/MlInputSource.java | 0.377
+                  src/main/java/de/viadee/sonarissuescoring/web/PredictionResultMessageConverterPlaintext.java | 0.364
+                          src/main/java/de/viadee/sonarissuescoring/service/prediction/train/H2oMLService.java | 0.350
+                                 src/main/java/de/viadee/sonarissuescoring/service/sonar/SonarIssueSource.java | 0.348
+                                src/main/java/de/viadee/sonarissuescoring/service/misc/ParallelismManager.java | 0.346
+        src/main/java/de/viadee/sonarissuescoring/service/prediction/extract/source/AdaptedMetricExecutor.java | 0.342
+             src/main/java/de/viadee/sonarissuescoring/service/desirability/calculation/RatingProviderAge.java | 0.333
+                src/main/java/de/viadee/sonarissuescoring/service/prediction/extract/AuthorCountExtractor.java | 0.329
+          src/main/java/de/viadee/sonarissuescoring/service/desirability/calculation/RatingProviderEffort.java | 0.321
+                                   src/main/java/de/viadee/sonarissuescoring/SonarIssueScoringApplication.java | 0.309
+                        src/main/java/de/viadee/sonarissuescoring/service/prediction/EvaluationResultPath.java | 0.309
+                                       src/main/java/de/viadee/sonarissuescoring/service/PredictionParams.java | 0.307
+                        src/main/java/de/viadee/sonarissuescoring/service/desirability/DesirabilitySource.java | 0.301
+                       src/main/java/de/viadee/sonarissuescoring/service/prediction/load/RepositoryLoader.java | 0.292
+       src/main/java/de/viadee/sonarissuescoring/service/desirability/calculation/RatingProviderDirectory.java | 0.272
+    src/main/java/de/viadee/sonarissuescoring/service/desirability/calculation/RatingProviderIssuesInFile.java | 0.262
+                src/main/java/de/viadee/sonarissuescoring/service/desirability/calculation/RatingProvider.java | 0.262
+                                            src/main/java/de/viadee/sonarissuescoring/web/IssueController.java | 0.257
+                                             src/main/java/de/viadee/sonarissuescoring/web/FileController.java | 0.254
+                    src/main/java/de/viadee/sonarissuescoring/service/prediction/extract/FeatureExtractor.java | 0.237
+                   src/main/java/de/viadee/sonarissuescoring/web/DesirabilityMapMessageConverterPlaintext.java | 0.226
+src/main/java/de/viadee/sonarissuescoring/service/desirability/calculation/RatingProviderChangePrediction.java | 0.220
+      src/main/java/de/viadee/sonarissuescoring/service/desirability/calculation/RatingProviderCentrality.java | 0.220
+                                src/main/java/de/viadee/sonarissuescoring/service/desirability/RatingType.java | 0.216
+                          src/main/java/de/viadee/sonarissuescoring/service/desirability/PathSuffixLookup.java | 0.208
+            src/main/java/de/viadee/sonarissuescoring/service/desirability/calculation/RatingProviderType.java | 0.188
+              src/main/java/de/viadee/sonarissuescoring/service/prediction/extract/source/MetricExtractor.java | 0.182
+        src/main/java/de/viadee/sonarissuescoring/service/desirability/calculation/RatingProviderSeverity.java | 0.162
+                             src/main/java/de/viadee/sonarissuescoring/service/prediction/train/MLService.java | 0.160
+                                       src/main/java/de/viadee/sonarissuescoring/web/StringTableFormatter.java | 0.150
+                            src/main/java/de/viadee/sonarissuescoring/service/prediction/load/StringCache.java | -0.000
+
